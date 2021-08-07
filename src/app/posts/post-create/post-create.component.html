@@ -1,0 +1,33 @@
+<mat-card>
+    <!-- <mat-progress-spinner *ngIf="isLoading"></mat-progress-spinner> -->
+   <form [formGroup]="form" (ngSubmit)="onSavePost()">
+    <mat-form-field>
+        <mat-label>Title</mat-label>
+        <input 
+            matInput 
+            type="text" 
+            formControlName="title"
+            autocomplete="off">
+        <!-- <mat-error *ngIf="form.get('title').invalid">Title is required</mat-error> -->
+     </mat-form-field>
+     <br>
+     <div>
+         <button mat-stroked-button type="button" (click)="filePicker.click()">Pick Image</button>
+         <input type="file" #filePicker (change)="onImagePicked($event)">
+     </div>
+     <br>
+     <div class="image-preview" *ngIf="imagePrev !== '' && imagePrev && form.get('image').valid">
+         <img [src]="imagePrev" [alt]="form.value.title">
+     </div>
+     <mat-form-field>
+         <mat-label>Body</mat-label>
+         <textarea 
+            rows="5" 
+            matInput 
+            formControlName="content"
+            autocomplete="off"></textarea>
+         <!-- <mat-error *ngIf="form.get('content').invalid">Body is required</mat-error> -->
+     </mat-form-field>
+     <button mat-raised-button color="accent" type="submit">Save Post</button>
+   </form>
+</mat-card>
